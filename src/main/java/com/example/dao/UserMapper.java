@@ -9,4 +9,6 @@ public interface UserMapper {
 	
 	public User selectUser(int id);
 	
+	public int idDupCheck(String beCheckedId);
+	
 }

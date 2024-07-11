@@ -16,4 +16,8 @@ public class UserServiceImpl implements UserService {
     public User selectUser(int id){
         return userMapper.selectUser(id);
     }
+    
+    public int idDupCheck(String beCheckedId){
+    	return userMapper.idDupCheck(beCheckedId);
+    }
 }

@@ -11,9 +11,25 @@
         <!-- 추가 필드 매핑 -->
         <result property="userCode" column="USERCODE"/>
     </resultMap>
+    <resultMap id="userVO" type="com.example.model.UserVO">
+        <id property="id" column="USER_ID"/>
+        <result property="userName" column="USERNAME"/>
+        <!-- 추가 필드 매핑 -->
+        <result property="userCode" column="USERCODE"/>
+    </resultMap>
 
     <select id="selectUser" parameterType="int" resultMap="userResultMap">
         SELECT USERCODE, USERNAME FROM TESTTABLE WHERE USERCODE = #{id}
+    </select>
+    
+    <select id="idDupCheck" parameterType="userVO" resultType="int">
+        SELECT COUNT(*) FROM TESTTABLE
+		WHERE LOWER(USERID) = LOWER(#{userId})
+    </select>
+    
+    <select id="insertUser" parameterType="userVO">
+        INSERT INTO TESTTABLE(USERID, USERNAME, PASSWORD, ENTRYDATE)
+        VALUES(#{userId}, #{userName}, #{password}, SYSDATE)
     </select>
     
 </mapper>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -10,7 +9,7 @@
 </head>
 <script type="text/javascript">
 	$(document).ready(function() {
-	    // ¿©±â¿¡ ½ÇÇàÇÏ°íÀÚ ÇÏ´Â ÄÚµå¸¦ ÀÛ¼ºÇÕ´Ï´Ù.
+	    // ì—¬ê¸°ì— ì‹¤í–‰í•˜ê³ ì í•˜ëŠ” ì½”ë“œë¥¼ ì‘ì„±í•©ë‹ˆë‹¤.
 	    
 	    var userName = ${getUserdata.userName}
 	    
@@ -18,7 +17,7 @@
 	    
 	    
 	    console.log("for git check");
-	    // ¿¹½Ã: ¹öÆ° Å¬¸¯ ÀÌº¥Æ® ÇÚµé·¯ µî·Ï
+	    // ì˜ˆì‹œ: ë²„íŠ¼ í´ë¦­ ì´ë²¤íŠ¸ í•¸ë“¤ëŸ¬ ë“±ë¡
 	});
 </script>
 <body>

@@ -6,9 +6,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.model.User;
+import com.example.model.UserVO;
 import com.example.service.UserService;
 
 @Controller
@@ -18,7 +22,7 @@ public class UserController {
 	private UserService userService; 
 	
 	@RequestMapping("/user")
-	public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String login2(HttpServletRequest request, HttpServletResponse response, Model model) {
 		
 		String idStr = request.getParameter("id");
 		
@@ -31,6 +35,71 @@ public class UserController {
 		model.addAttribute("getUserdata", getUserdata);
 		
 		return "result";
+	}
+	
+	@RequestMapping("/main")
+	public String main(HttpServletRequest request, HttpServletResponse response, Model model) {
+		System.out.println("main으로 이동");
+		return "main/main";
+	}
+	
+	@RequestMapping("/login")
+	public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
+		System.out.println("login으로 이동");
+		return "login/login";
+	}
+	
+	@RequestMapping("/join")
+	public String join(HttpServletRequest request, HttpServletResponse response, Model model) {
+		System.out.println("join으로 이동");
+		return "join/join";
+	}
+	
+	@RequestMapping("/move")
+	public String move(HttpServletRequest request, HttpServletResponse response, Model model) {
+		return "move";
+	}
+	
+	@RequestMapping("/joinConfirm")
+	public String joinConfirm(HttpServletRequest request, HttpServletResponse response, Model model,
+			@ModelAttribute("user") UserVO userVO) {
+		System.out.println("가입완료");
+		System.out.println("userId : "+userVO.getUserId());
+		System.out.println("password : "+userVO.getPassword());
+		System.out.println("userName : "+userVO.getUserName());
+		
+		return "join/joinConfirm";
+	}
+	
+	@RequestMapping(value="/ajax/idDupCheck", produces="application/text; charset=utf8")
+	@ResponseBody
+	public String idDupCheck(HttpServletRequest request, HttpServletResponse response, Model model,
+			@ModelAttribute("user") UserVO userVO) {
+		
+		String message = "";
+		
+		//사용자가 입력한 아이디
+		String beCheckedId = userVO.getUserId();
+		System.out.println("beCheckedId : "+beCheckedId);
+		
+		//아이디 존재여부 확인
+		int idDupChk = this.userService.idDupCheck(beCheckedId);
+		System.out.println("idDupChk : "+idDupChk);
+		
+		//이미 사용중인 아이디이면
+		if(idDupChk > 0) {
+//			message = "already used ID.";
+			message = "이미 사용중인 아이디 입니다.";
+//			message = "{\"message\": \"이미 사용중인 아이디 입니다.\"}";
+			System.out.println(message);
+		}else {
+//			message = "useable ID.";
+			message = "사용 가능한 아이디 입니다.";
+//			message = "{\"message\": \"사용 가능한 아이디 입니다.\"}";
+			System.out.println(message);
+		}
+		
+		return message;
 	}
 	
 }

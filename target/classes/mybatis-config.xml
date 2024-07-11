@@ -13,7 +13,7 @@
     </settings>
     
     <typeAliases>
-        <package name="com.example.domain" />
+        <package name="com.example.model" />
     </typeAliases>
 
     <mappers>
