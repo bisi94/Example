@@ -10,8 +10,7 @@
            http://www.springframework.org/schema/mvc
            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<context:component-scan
-		base-package="com.example" />
+	<context:component-scan base-package="com.example" />
 	<mvc:annotation-driven />
 
 	<!-- ViewResolver 설정 -->
@@ -25,8 +24,10 @@
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
 <!-- 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" /> -->
 <!-- 		<property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe" /> -->
-		<property name="username" value="system" />
-		<property name="password" value="oracle" />
+<!-- 		<property name="username" value="system" /> -->
+<!-- 		<property name="password" value="oracle" /> -->
+		<property name="username" value="SCOTT" />
+		<property name="password" value="TIGER" />
 	</bean>
 
 	<!-- MyBatis SqlSessionFactory 설정 -->
