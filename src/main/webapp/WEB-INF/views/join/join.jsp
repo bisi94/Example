@@ -22,30 +22,51 @@ $(document).ready(function() {
 });
 
 function idDupCheck(){
-	
 	var userId = $("#userId").val();	
-	
-	$.ajax({		
-		url: '/ajax/idDupCheck',
-		method: 'GET',
-// 		dataType: 'json',
-		data: {
-			'userId' : userId
-		},		
-		success: function(data) {
-			alert(data);
-// 		    $("#result").html(response);
-		},
-		error: function(xhr, status, error) {
-		    console.error("Error: " + error);
-		}
-	});
+	if(userId == null || userId == ''){
+		alert("아이디를 입력하세요");
+	}else{
+		$.ajax({		
+			url: '/ajax/idDupCheck',
+			method: 'GET',
+			data: {
+				'userId' : userId
+			},		
+			success: function(data) {
+				alert(data);
+				$("#idDupCheck").val("Y");	
+				$("#idChecked").html('<b style="color:green;">☑</b>');
+			},
+			error: function(xhr, status, error) {
+			    console.error("Error: " + error);
+			}
+		});
+	}
+}
+
+function pwCheck(){
+	var passwordCheck = $("#passwordCheck").val();
+	var password = $("#password").val();
+	if(password != passwordCheck){
+		$("#pwCheck").html('<b style="color:red;">X</b>');
+	}else{
+		$("#pwCheck").html('<b style="color:green;">☑</b>');
+	}
+}
+
+function join(){
+	if($("#idDupCheck").val() == 'N'){
+		alert("아이디 중복확인이 필요합니다.");
+	}else{
+		$("#joinForm").submit();
+	}
 }
 
 </script>
 <body>
 <%@ include file="/WEB-INF/views/decoration/topMenu.jsp" %>
-<form action="joinConfirm">
+<form id="joinForm" action="joinConfirm">
+<input type="text" id="idDupCheck" name="idDupCheck" value="N">
 <div id="container">
 	<div id="login">
 		<ul>
@@ -58,7 +79,8 @@ function idDupCheck(){
 			<li>
 				<label for="userId">아이디</label>
 				<input type="text" id="userId" name="userId" placeholder="ID" value="">
-				<a onclick="idDupCheck()">id 중복확인</a>
+				<b id="idCheck"></b>
+				<a onclick="idDupCheck()">id 중복확인<b id="idChecked"></b></a>
 			</li>
 		</ul>
 		<ul>
@@ -70,17 +92,18 @@ function idDupCheck(){
 		<ul>
 			<li>
 				<label for="passwordCheck">비밀번호확인</label>
-				<input type="text" id="passwordCheck" name="passwordCheck" placeholder="passwordCheck">
+				<input type="text" id="passwordCheck" name="passwordCheck" placeholder="passwordCheck" oninput="pwCheck()">
+				<b id="pwCheck"></b>
 			</li>
 		</ul>
 		<ul>
 			<li>
-				<label for="eMail">이메일</label>
-				<input type="text" id="eMail" name="eMail" placeholder="eMail">
+				<label for="email">이메일</label>
+				<input type="text" id="email" name="email" placeholder="email">
 			</li>
 		</ul>
 	</div>
-	<button type="submit">가입</button>
+	<a onclick="join()">가입</a>
 </div>
 </form>
 </body>

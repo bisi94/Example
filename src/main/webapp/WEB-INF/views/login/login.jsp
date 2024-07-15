@@ -44,7 +44,7 @@
 			<ul>
 				<li>				
 			        <label for="id">User ID : </label>
-			        <input type="text" id="id" name="id">
+			        <input type="text" id="userId" name="userId">
 		        </li>
 		        <li>
 			        <label for="id">Password : </label>
@@ -54,6 +54,8 @@
 		</div>
 		<div id="button">
 			<button type="submit">login</button>
+			<button onclick="goJoin();">join</button>
+			<button onclick="goFindMyAccount();">findMyAccount</button>
 		</div>
         
 	</div>

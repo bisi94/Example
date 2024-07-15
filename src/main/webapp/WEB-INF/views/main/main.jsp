@@ -26,5 +26,7 @@
 </style>
 <body>
 <%@ include file="/WEB-INF/views/decoration/topMenu.jsp" %>
+<c:if test="${not empty userInfo }"><h2>${userInfo.userId }님 환영합니다.</h2></c:if>
+
 </body>
 </html>

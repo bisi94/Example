@@ -7,6 +7,7 @@ public class UserVO {
     private String userId;
     private String userName;
     private String password;
+    private String email;
     private String entryDate;
     private String duration;
     
@@ -14,6 +15,14 @@ public class UserVO {
     
     // Getters and setters
     
+    
+    
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getUserId() {
 		return userId;
 	}

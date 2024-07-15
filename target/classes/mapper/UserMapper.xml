@@ -27,9 +27,15 @@
 		WHERE LOWER(USERID) = LOWER(#{userId})
     </select>
     
-    <select id="insertUser" parameterType="userVO">
-        INSERT INTO USERINFO(USERID, USERNAME, PASSWORD, ENTRYDATE)
-        VALUES(#{userId}, #{userName}, #{password}, SYSDATE)
+    <insert id="joinUser" parameterType="userVO">
+        INSERT INTO USERINFO(USERID, USERNAME, PASSWORD, EMAIL, ENTRYDATE)
+        VALUES(#{userId}, #{userName}, #{password}, #{email}, SYSDATE)
+    </insert>
+    
+    <select id="loginCheck" parameterType="userVO" resultType="userVO">
+        SELECT * FROM USERINFO
+		WHERE LOWER(USERID) = LOWER(#{userId})
+			AND PASSWORD = #{password}
     </select>
     
 </mapper>

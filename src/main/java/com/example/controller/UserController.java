@@ -22,19 +22,14 @@ public class UserController {
 	private UserService userService; 
 	
 	@RequestMapping("/user")
-	public String login2(HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String userLogin(HttpServletRequest request, HttpServletResponse response, Model model,
+			@ModelAttribute("user") UserVO userVO) {
 		
-		String idStr = request.getParameter("id");
+		UserVO userInfo = this.userService.loginCheck(userVO);
 		
-		int id = Integer.parseInt(idStr);
+		model.addAttribute("userInfo", userInfo);
 		
-		User getUserdata = this.userService.selectUser(id);
-		
-		System.out.println("id ::: " +id+ " :::::: result :::: " +getUserdata.getUserName());
-		
-		model.addAttribute("getUserdata", getUserdata);
-		
-		return "result";
+		return "main/main";
 	}
 	
 	@RequestMapping("/main")
@@ -63,10 +58,13 @@ public class UserController {
 	@RequestMapping("/joinConfirm")
 	public String joinConfirm(HttpServletRequest request, HttpServletResponse response, Model model,
 			@ModelAttribute("user") UserVO userVO) {
-		System.out.println("가입완료");
 		System.out.println("userId : "+userVO.getUserId());
 		System.out.println("password : "+userVO.getPassword());
 		System.out.println("userName : "+userVO.getUserName());
+		
+		this.userService.joinUser(userVO);
+		
+		System.out.println("가입완료");
 		
 		return "join/joinConfirm";
 	}
