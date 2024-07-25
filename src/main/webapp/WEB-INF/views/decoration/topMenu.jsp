@@ -3,14 +3,14 @@
 		width:50%;
 		
 	}
-	#topMenu #leftArea div{
+	#topMenu #leftArea img{
 		float: left;
 		width: 10%;
 		height: 50px;
-		border: 1px solid red;
 		border-radius: 10px;
 		
 	}
+	
 	#topMenu #rightArea{
 		width:50%;
 		
@@ -29,7 +29,7 @@
 </style>
 <div id="topMenu">
 	<div id="leftArea">
-		<div><a href="/main"></a></div>
+		<a href="/main"><img src="<%= request.getContextPath() %>/img/zzang.jpg" alt="Image"></a>
 	</div>
 	<div id="rightArea">
 		<div><a href="/main">home</a></div>
