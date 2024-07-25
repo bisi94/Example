@@ -24,9 +24,23 @@
 	}
 	
 </style>
-<body>
+
 <%@ include file="/WEB-INF/views/decoration/topMenu.jsp" %>
 <c:if test="${not empty userInfo }"><h2>${userInfo.userId }님 환영합니다.</h2></c:if>
+
+<%@ page import="java.io.File" %>
+<%
+    String relativeWebPath = "/img/zzang.jpg";
+    String absoluteDiskPath = application.getRealPath(relativeWebPath);
+    File file = new File(absoluteDiskPath);
+    if (file.exists()) {
+        out.println("File exists: " + absoluteDiskPath);
+    } else {
+        out.println("File does not exist: " + absoluteDiskPath);
+    }
+%>
+ <h1>이미지 출력</h1>
+    <img src="<%= request.getContextPath() %>/img/zzang.jpg" alt="Image">
 
 </body>
 </html>

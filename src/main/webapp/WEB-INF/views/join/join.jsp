@@ -34,7 +34,7 @@ function idDupCheck(){
 			},		
 			success: function(data) {
 				alert(data);
-				$("#idDupCheck").val("Y");	
+				$("#idDupCheck").val("Y");
 				$("#idChecked").html('<b style="color:green;">☑</b>');
 			},
 			error: function(xhr, status, error) {
@@ -67,6 +67,7 @@ function join(){
 <%@ include file="/WEB-INF/views/decoration/topMenu.jsp" %>
 <form id="joinForm" action="joinConfirm">
 <input type="text" id="idDupCheck" name="idDupCheck" value="N">
+<input type="text" id="idDupChk" name="idDupChk" value="">
 <div id="container">
 	<div id="login">
 		<ul>

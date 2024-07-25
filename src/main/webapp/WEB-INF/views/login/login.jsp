@@ -35,9 +35,36 @@
 		width: 20%;
 	}
 </style>
+<script type="text/javascript">
+$(document).ready(function() {
+
+	function loginCheck(){
+		
+		$.ajax({		
+			url: '/ajax/loginCheck',
+			method: 'GET',
+			data: {
+				'userId' : $("#userId").val(),
+				'password' : $("#password").val()
+			},		
+			success: function(data) {
+				alert(data);
+				$("#idDupCheck").val("Y");
+				$("#idChecked").html('<b style="color:green;">☑</b>');
+			},
+			error: function(xhr, status, error) {
+			    console.error("Error: " + error);
+			}
+		});
+		
+	}
+
+});
+</script>
 <body>
 <%@ include file="/WEB-INF/views/decoration/topMenu.jsp" %>
 <form action="user" method="get">
+<input id="loginCheck" name="loginCheck" value="${loginCheck }">
 <div id="container">
 	<div id="login">
 		<div id="input">
@@ -53,7 +80,7 @@
 			</ul>
 		</div>
 		<div id="button">
-			<button type="submit">login</button>
+			<button onclick="loginCheck();">login</button>
 			<button onclick="goJoin();">join</button>
 			<button onclick="goFindMyAccount();">findMyAccount</button>
 		</div>

@@ -2,6 +2,7 @@ package com.example.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,16 +28,35 @@ public class UserController {
 		
 		UserVO userInfo = this.userService.loginCheck(userVO);
 		
-		model.addAttribute("userInfo", userInfo);
+		if(userInfo == null) {
+			model.addAttribute("loginCheck", "N");
+			return "login/login";
+		}else {
+			HttpSession ses = request.getSession(); //세션은 만들었는데 어캐쓰는지를 아직 모름..ㅎ 슬슬해보자
+			
+			model.addAttribute("userInfo", userInfo);
+			return "main/main";
+		}
+	}
+	
+	@RequestMapping("/ajax/loginCheck")
+	public String loginCheck(HttpServletRequest request, HttpServletResponse response, Model model,
+			@ModelAttribute("user") UserVO userVO) {
 		
+		UserVO userInfo = this.userService.loginCheck(userVO);
+		
+		model.addAttribute("userInfo", userInfo);
 		return "main/main";
 	}
 	
 	@RequestMapping("/main")
 	public String main(HttpServletRequest request, HttpServletResponse response, Model model) {
 		System.out.println("main으로 이동");
+		
 		return "main/main";
 	}
+	
+	
 	
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -82,7 +102,6 @@ public class UserController {
 		
 		//아이디 존재여부 확인
 		int idDupChk = this.userService.idDupCheck(beCheckedId);
-		System.out.println("idDupChk : "+idDupChk);
 		
 		//이미 사용중인 아이디이면
 		if(idDupChk > 0) {
