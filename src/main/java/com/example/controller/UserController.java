@@ -53,7 +53,8 @@ public class UserController {
 	public String main(HttpServletRequest request, HttpServletResponse response, Model model) {
 		System.out.println("main으로 이동");
 		
-		return "main/main";
+		return "templete/index";
+//		return "main/main";
 	}
 	
 	
